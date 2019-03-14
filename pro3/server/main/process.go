@@ -27,6 +27,9 @@ func (process *Process) processMes(mes *message.Message) (err error) {
 			Conn: process.Conn,
 		}
 		err = up.ProcessRegister(mes)
+	case message.SmsMesType:
+		smsProcess := &processor.SmsProcess{}
+		smsProcess.SendGroupMes(mes)
 	default:
 		fmt.Println("消息类型不存在，无法处理。。。")
 	}
